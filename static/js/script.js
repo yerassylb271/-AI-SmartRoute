@@ -294,29 +294,23 @@ function drawRoute(route){
 
 function showWeather(weather){
 
-
     document
     .getElementById("weather")
     .innerHTML = `
 
-
-    <p>ðŸŒ¡ <b>
-    ${weather.temperature} Â°C
-    </b></p>
-
-
     <p>
-    â˜ ${weather.condition}
+    Temperature: <b>${weather.temperature} °C</b>
     </p>
 
-
     <p>
-    ðŸŒ¬ ${weather.wind} m/s
+    Condition: ${weather.condition}
     </p>
 
+    <p>
+    Wind: ${weather.wind} m/s
+    </p>
 
     `;
-
 
 }
 
@@ -396,7 +390,7 @@ if(route.recommended){
     badge += `
 
     <div class="ai-badge">
-        ðŸ¤– AI Recommends
+        – AI Recommends
     </div>
 
     `;
@@ -484,34 +478,25 @@ if(route.eco){
         </h3>
 
 
-        <h2>
-        ${route.name}
-        </h2>
-
-
         <p>
-        â± ${route.time} min
-        </p>
+TIME: ${route.time} min
+</p>
 
+<p>
+DISTANCE: ${route.distance} km
+</p>
 
-        <p>
-        ðŸ“ ${route.distance} km
-        </p>
+<p>
+PRICE: ${route.price} KZT
+</p>
 
+<p>
+CO2: ${route.co2} kg
+</p>
 
-        <p>
-        ðŸ’° ${route.price} â‚¸
-        </p>
-
-
-        <p>
-        ðŸŒ± ${route.co2} kg COâ‚‚
-        </p>
-
-
-        <p>
-        â­ ${route.score}/10
-        </p>
+<p>
+SCORE: ${route.score}/10
+</p>
 
 
         </div>
