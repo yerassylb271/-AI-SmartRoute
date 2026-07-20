@@ -4,7 +4,11 @@ from flask_cors import CORS
 from route_service import get_routes
 from weather import get_weather
 from ai import analyze_routes
+from flask import Flask, render_template, request, jsonify
 
+app = Flask(__name__)
+
+app.config['JSON_AS_ASCII'] = False
 app = Flask(__name__)
 CORS(app)
 
