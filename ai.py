@@ -22,7 +22,6 @@ Description: {weather["description"]}
 Wind: {weather["wind"]} m/s
 
 Available routes:
-
 """
 
     for route in routes:
@@ -30,19 +29,12 @@ Available routes:
         prompt += f"""
 
 Category: {route["category"]}
-
 Transport: {route["name"]}
-
 Distance: {route["distance"]} km
-
 Time: {route["time"]} min
-
 Price: {route["price"]} KZT
-
 CO2: {route["co2"]} kg
-
 Smart Score: {route["score"]}/10
-
 """
 
     prompt += """
@@ -58,8 +50,7 @@ Reason:
 - reason 2
 - reason 3
 
-Do not compare too much.
-Keep answer under 80 words.
+Keep the answer under 80 words.
 """
 
     try:
@@ -87,13 +78,23 @@ Keep answer under 80 words.
 
     except Exception:
 
-        for route in routes:
-            if route["recommended"]:
-                return f"""
-Recommended: {route["name"]}
+        # Choose the best route locally if AI is unavailable
+        best = max(
+            routes,
+            key=lambda r: (r["score"], -r["time"])
+        )
+
+        return f"""
+Recommended: {best["name"]}
 
 Reason:
-- Highest Smart Score ({route["score"]}/10)
-- Balanced travel time and cost
-- Suitable for current weather
+- Highest Smart Score ({best["score"]}/10)
+- Best balance between travel time, cost and environmental impact
+- Suitable for the current weather conditions
+
+Summary:
+Time: {best["time"]} min
+Distance: {best["distance"]} km
+Cost: {best["price"]} KZT
+CO₂: {best["co2"]} kg
 """
